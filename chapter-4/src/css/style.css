@@ -40,7 +40,7 @@ p {
   border-bottom: solid 1px #e0e0e0;
 }
 
-.account__item:last-child {
+.accountList__item:last-child {
   border: 0;
 }
 
@@ -48,7 +48,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .account__name {

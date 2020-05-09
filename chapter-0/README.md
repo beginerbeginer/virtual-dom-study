@@ -27,6 +27,10 @@
 - `npm install prettier -D`
 - prettierrc
 
+6. `"start": "parcel src/index.html --open"`
+
+- localhost:1234 　で確認する
+
 ## 参考資料
 
 - https://qiita.com/soarflat/items/06377f3b96964964a65d

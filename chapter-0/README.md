@@ -26,10 +26,12 @@
 
 - `npm install prettier -D`
 - prettierrc
+- format させよう
 
 6. `"start": "parcel src/index.html --open"`
 
 - localhost:1234 　で確認する
+- Hello World の確認
 
 ## 参考資料
 

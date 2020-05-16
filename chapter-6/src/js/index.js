@@ -30,7 +30,21 @@ const state = {
   ]
 }
 
-const accountItem = (account) => {
+const actions = {
+  follow(state, id) {
+    const accounts = state.accounts.map((f) => {
+      if (f.id === id) {
+        return { ...f, isFollow: !f.isFollow }
+      } else {
+        return f
+      }
+    })
+
+    return { ...state, accounts }
+  }
+}
+
+const accountItem = (account, action, state) => {
   return h('div', {
     attrs: {},
     children: [
@@ -62,7 +76,10 @@ const accountItem = (account) => {
               h('button', {
                 attrs: {
                   type: 'button',
-                  class: `followBtn ${account.isFollow ? 'isFollow' : ''}`
+                  class: `followBtn ${account.isFollow ? 'isFollow' : ''}`,
+                  onclick: () => {
+                    action.follow(state, account.id)
+                  }
                 },
                 children: [account.isFollow ? 'フォロー中' : 'フォローする']
               })
@@ -80,7 +97,7 @@ const accountItem = (account) => {
   })
 }
 
-const view = (state) =>
+const view = (state, action) =>
   h('div', {
     attrs: {
       id: 'app'
@@ -95,7 +112,7 @@ const view = (state) =>
             attrs: {
               class: 'accountList__item'
             },
-            children: [accountItem(e)]
+            children: [accountItem(e, action, state)]
           })
         })
       })
@@ -105,5 +122,6 @@ const view = (state) =>
 new App({
   el: '#app',
   view,
-  state
+  state,
+  actions
 })

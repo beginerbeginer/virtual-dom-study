@@ -1,7 +1,5 @@
 //
 
-import { render } from './render'
-
 function renderElement({ tagName, attrs, children }) {
   const $el = document.createElement(tagName)
 
@@ -45,7 +43,7 @@ export const updateElements = (parent, newNode, oldNode, index = 0) => {
     const newLength = newNode.children.length
     const oldLength = oldNode.children.length
     for (let i = 0; i < newLength || i < oldLength; i++) {
-      updateElement(parent.childNodes[index], newNode.children[i], oldNode.children[i], i)
+      updateElements(parent.childNodes[index], newNode.children[i], oldNode.children[i], i)
     }
   }
 }

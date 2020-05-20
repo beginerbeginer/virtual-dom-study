@@ -1,5 +1,4 @@
-import { render } from './render'
-import { updateElements } from './view'
+import { updateElements, render } from './view'
 
 export class App {
   constructor(params) {

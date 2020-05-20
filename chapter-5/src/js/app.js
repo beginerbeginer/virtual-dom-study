@@ -1,4 +1,4 @@
-import { mount, render } from './render'
+import { mount, render } from './view'
 
 export class App {
   constructor(params) {
@@ -14,6 +14,6 @@ export class App {
   }
 
   appRender() {
-    mount(render(this.newNode), this.el)
+    this.el.appendChild(render(this.newNode))
   }
 }

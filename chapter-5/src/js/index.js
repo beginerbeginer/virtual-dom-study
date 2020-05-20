@@ -81,25 +81,18 @@ const accountItem = (account) => {
 }
 
 const view = (state) =>
-  h('div', {
+  h('ul', {
     attrs: {
-      id: 'app'
+      class: 'accountList'
     },
-    children: [
-      h('ul', {
+    children: state.accounts.map((e) => {
+      return h('li', {
         attrs: {
-          class: 'accountList'
+          class: 'accountList__item'
         },
-        children: state.accounts.map((e) => {
-          return h('li', {
-            attrs: {
-              class: 'accountList__item'
-            },
-            children: [accountItem(e)]
-          })
-        })
+        children: [accountItem(e)]
       })
-    ]
+    })
   })
 
 new App({

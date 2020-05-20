@@ -10,9 +10,9 @@ state を受け取るようにする
 this.state の定義
 this.newNode の定義
 appRender
-mount と render を呼び出し、this.newNode を渡して,this.el へ
+render を呼び出し、this.newNode を渡して,this.el へ
 
-index.js に new App()する。mount と render の import を消す
+index.js に new App()render の import を消す
 new App に view と state と el を渡す
 
 resoleveNode()定義

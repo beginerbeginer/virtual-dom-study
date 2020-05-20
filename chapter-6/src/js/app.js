@@ -1,5 +1,5 @@
-import { mount, render } from './render'
-import updateElement from './updateElement'
+import { render } from './render'
+import { updateElements } from './view'
 
 export class App {
   constructor(params) {
@@ -8,6 +8,7 @@ export class App {
     this.state = params.state
     this.actions = this.dispatchAction(params.actions)
     this.newNode = this.view(this.state, this.actions)
+
     this.resolveNode()
   }
 
@@ -34,21 +35,20 @@ export class App {
   delayRender() {
     if (!this.isDelay) {
       this.isDelay = true
+
       setTimeout(this.appRender.bind(this))
     }
   }
 
   appRender() {
     if (this.oldNode) {
-      const patch = updateElement(this.oldNode, this.newNode)
-      this.rootElement = patch(this.rootElement)
+      updateElements(this.el, this.newNode, this.oldNode)
     } else {
-      const patch = updateElement(this.newNode)
-      this.rootElement = patch(render(this.newNode))
+      this.el.appendChild(render(this.newNode))
     }
-    mount(this.rootElement, this.el)
 
     this.isDelay = false
+
     this.oldNode = this.newNode
   }
 }

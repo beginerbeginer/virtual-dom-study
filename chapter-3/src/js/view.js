@@ -18,8 +18,3 @@ export function render(vNode) {
   }
   return renderElement(vNode)
 }
-
-export const mount = ($node, $target) => {
-  $target.replaceWith($node)
-  return $node
-}

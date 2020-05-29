@@ -6,7 +6,7 @@ const data = [
     name: "リオネル・メッシ",
     team: "FCバルセロナ",
     description:
-      "現在はフリーランスとして活動中。TypeScript + Reactでの開発をメインにお仕事いただいてます。フロントエンドネタを中心に呟きます。GraphQL | Node.js | GatsbyJs | Next.js",
+      "アルゼンチンサンタフェ州ロサリオ出身のイタリア系アルゼンチン人サッカー選手。リーガ・エスパニョーラ・FCバルセロナ所属。アルゼンチン代表。ポジションはフォワード (wikipedia)",
     isFollow: false,
   },
   {
@@ -14,7 +14,7 @@ const data = [
     name: "クリスティアーノ・ロナウド",
     team: "Juventus",
     description:
-      "現在はフリーランスとして活動中。TypeScript + Reactでの開発をメインにお仕事いただいてます。フロントエンドネタを中心に呟きます。GraphQL | Node.js | GatsbyJs | Next.js",
+      "ポルトガル・フンシャル出身のサッカー選手。セリエA・ユヴェントスFC所属。ポルトガル代表。ポジションはフォワード (wikipedia)",
     isFollow: true,
   },
   {
@@ -22,7 +22,7 @@ const data = [
     name: "ネイマール",
     team: "パリサンジェルマン",
     description:
-      "現在はフリーランスとして活動中。TypeScript + Reactでの開発をメインにお仕事いただいてます。フロントエンドネタを中心に呟きます。GraphQL | Node.js | GatsbyJs | Next.js",
+      "ブラジル・サンパウロ州モジ・ダス・クルーゼス出身のサッカー選手。ブラジル代表。リーグ・アン・パリ・サンジェルマンFC所属。ポジションはフォワード (wikipedia)",
     isFollow: false,
   },
 ];

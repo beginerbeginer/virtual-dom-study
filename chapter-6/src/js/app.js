@@ -18,8 +18,9 @@ export class App {
       const action = actions[key]
 
       dispatched[key] = (state, option) => {
-        this.state = action(state, option)
+        const r = action(state, option)
         this.resolveNode()
+        return r
       }
     }
 

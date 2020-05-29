@@ -40,7 +40,7 @@ const actions = {
       }
     })
 
-    return { ...state, accounts }
+    state.accounts = accounts
   }
 }
 

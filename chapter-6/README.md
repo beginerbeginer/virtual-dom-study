@@ -8,8 +8,11 @@ dispatchAction の実装
 
 view.js の作成
 updateElements の実装
-isChanged の newNode と oldNode を比較する
+hasChanged の newNode と oldNode を比較する
 updateElements で再帰的に処理をして DOM に反映する
+switch のところ
+updateAttrs の実装
+updateAttrs と renderElement で同じ実装があるから setAttributes に
 
 appRender の中身を書き換え
 oldNode と newNode を updateElements に渡す

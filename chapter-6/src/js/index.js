@@ -1,14 +1,14 @@
-import h from './createElement'
-import { App } from './app'
+import h from './vdom/createElement'
+import { app } from './vdom/app'
 
-const state = {
+const INITIAL_STATE = {
   accounts: [
     {
       id: 1,
       name: 'リオネル・メッシ',
       team: 'FCバルセロナ',
       description:
-        '現在はフリーランスとして活動中。TypeScript + Reactでの開発をメインにお仕事いただいてます。フロントエンドネタを中心に呟きます。GraphQL | Node.js | GatsbyJs | Next.js',
+        'アルゼンチンサンタフェ州ロサリオ出身のイタリア系アルゼンチン人サッカー選手。リーガ・エスパニョーラ・FCバルセロナ所属。アルゼンチン代表。ポジションはフォワード (wikipedia)',
       isFollow: false
     },
     {
@@ -16,7 +16,7 @@ const state = {
       name: 'クリスティアーノ・ロナウド',
       team: 'Juventus',
       description:
-        '現在はフリーランスとして活動中。TypeScript + Reactでの開発をメインにお仕事いただいてます。フロントエンドネタを中心に呟きます。GraphQL | Node.js | GatsbyJs | Next.js',
+        'ポルトガル・フンシャル出身のサッカー選手。セリエA・ユヴェントスFC所属。ポルトガル代表。ポジションはフォワード (wikipedia)',
       isFollow: true
     },
     {
@@ -24,14 +24,14 @@ const state = {
       name: 'ネイマール',
       team: 'パリサンジェルマン',
       description:
-        '現在はフリーランスとして活動中。TypeScript + Reactでの開発をメインにお仕事いただいてます。フロントエンドネタを中心に呟きます。GraphQL | Node.js | GatsbyJs | Next.js',
+        'ブラジル・サンパウロ州モジ・ダス・クルーゼス出身のサッカー選手。ブラジル代表。リーグ・アン・パリ・サンジェルマンFC所属。ポジションはフォワード (wikipedia)',
       isFollow: false
     }
   ]
 }
 
 const actions = {
-  follow(state, id) {
+  toggleFollow(state, id) {
     const accounts = state.accounts.map((f) => {
       if (f.id === id) {
         return { ...f, isFollow: !f.isFollow }
@@ -40,11 +40,11 @@ const actions = {
       }
     })
 
-    return { ...state, accounts }
+    state.accounts = accounts
   }
 }
 
-const accountItem = (account, action, state) => {
+const accountItem = (account, props, action) => {
   return h('div', {
     attrs: {},
     children: [
@@ -77,9 +77,7 @@ const accountItem = (account, action, state) => {
                 attrs: {
                   type: 'button',
                   class: `followBtn ${account.isFollow ? 'isFollow' : ''}`,
-                  onclick: () => {
-                    action.follow(state, account.id)
-                  }
+                  onclick: () => action.toggleFollow(props, account.id)
                 },
                 children: [account.isFollow ? 'フォロー中' : 'フォローする']
               })
@@ -97,24 +95,24 @@ const accountItem = (account, action, state) => {
   })
 }
 
-const view = (state, action) =>
+const view = (props, action) =>
   h('ul', {
     attrs: {
       class: 'accountList'
     },
-    children: state.accounts.map((e) => {
+    children: props.accounts.map((e) => {
       return h('li', {
         attrs: {
           class: 'accountList__item'
         },
-        children: [accountItem(e, action, state)]
+        children: [accountItem(e, props, action)]
       })
     })
   })
 
-new App({
-  el: '#app',
+app({
+  root: '#app',
+  state: INITIAL_STATE,
   view,
-  state,
   actions
 })

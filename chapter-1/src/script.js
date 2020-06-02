@@ -16,11 +16,13 @@ $(function () {
       // ajax
 
       $this.removeClass("isFollow");
+      $this.text("フォローする");
       $accountItem.data("follow", false);
     } else {
       // ajax
 
       $this.addClass("isFollow");
+      $this.text("フォロー中");
       $accountItem.data("follow", true);
     }
   });

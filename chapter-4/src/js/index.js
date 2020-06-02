@@ -1,14 +1,14 @@
 import h from './createElement'
-import { render, mount } from './view'
+import { render, mount } from './render'
 
-const state = {
+const INITIAL_STATE = {
   accounts: [
     {
       id: 1,
       name: 'リオネル・メッシ',
       team: 'FCバルセロナ',
       description:
-        '現在はフリーランスとして活動中。TypeScript + Reactでの開発をメインにお仕事いただいてます。フロントエンドネタを中心に呟きます。GraphQL | Node.js | GatsbyJs | Next.js',
+        'アルゼンチンサンタフェ州ロサリオ出身のイタリア系アルゼンチン人サッカー選手。リーガ・エスパニョーラ・FCバルセロナ所属。アルゼンチン代表。ポジションはフォワード (wikipedia)',
       isFollow: false
     },
     {
@@ -16,7 +16,7 @@ const state = {
       name: 'クリスティアーノ・ロナウド',
       team: 'Juventus',
       description:
-        '現在はフリーランスとして活動中。TypeScript + Reactでの開発をメインにお仕事いただいてます。フロントエンドネタを中心に呟きます。GraphQL | Node.js | GatsbyJs | Next.js',
+        'ポルトガル・フンシャル出身のサッカー選手。セリエA・ユヴェントスFC所属。ポルトガル代表。ポジションはフォワード (wikipedia)',
       isFollow: true
     },
     {
@@ -24,7 +24,7 @@ const state = {
       name: 'ネイマール',
       team: 'パリサンジェルマン',
       description:
-        '現在はフリーランスとして活動中。TypeScript + Reactでの開発をメインにお仕事いただいてます。フロントエンドネタを中心に呟きます。GraphQL | Node.js | GatsbyJs | Next.js',
+        'ブラジル・サンパウロ州モジ・ダス・クルーゼス出身のサッカー選手。ブラジル代表。リーグ・アン・パリ・サンジェルマンFC所属。ポジションはフォワード (wikipedia)',
       isFollow: false
     }
   ]
@@ -80,12 +80,12 @@ const accountItem = (account) => {
   })
 }
 
-const view = (state) =>
+const view = (props) =>
   h('ul', {
     attrs: {
       class: 'accountList'
     },
-    children: state.accounts.map((e) => {
+    children: props.accounts.map((e) => {
       return h('li', {
         attrs: {
           class: 'accountList__item'
@@ -95,6 +95,6 @@ const view = (state) =>
     })
   })
 
-const $app = render(view(state))
+const $app = render(view(INITIAL_STATE))
 const el = document.getElementById('app')
 el.appendChild($app)

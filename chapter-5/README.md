@@ -9,10 +9,10 @@ this.view の定義
 state を受け取るようにする
 this.state の定義
 this.newNode の定義
-appRender
+renderDOM
 render を呼び出し、this.newNode を渡して,this.el へ
 
 index.js に new App()render の import を消す
-new App に view と state と el を渡す
+app に view と state と el を渡す
 
 resoleveNode()定義

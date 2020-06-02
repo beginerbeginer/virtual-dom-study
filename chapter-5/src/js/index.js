@@ -1,5 +1,5 @@
 import h from './createElement'
-import { app } from './app'
+import { app } from './vdom/app'
 
 const INITIAL_STATE = {
   accounts: [

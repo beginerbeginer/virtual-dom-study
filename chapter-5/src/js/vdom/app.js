@@ -1,4 +1,4 @@
-import { mount, render } from './view'
+import { mount, render } from './render'
 
 export const app = ({ root, state, view }) => {
   const $el = document.querySelector(root)

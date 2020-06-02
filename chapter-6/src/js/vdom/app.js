@@ -1,4 +1,4 @@
-import { updateElements } from './view'
+import { patch } from './patch'
 
 export const app = ({ root, state, view, actions }) => {
   const $el = document.querySelector(root)
@@ -28,7 +28,7 @@ export const app = ({ root, state, view, actions }) => {
 
   const renderDOM = () => {
     updateNode()
-    updateElements($el, newNode, oldNode)
+    patch($el, newNode, oldNode)
     oldNode = newNode
   }
 

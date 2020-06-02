@@ -1,5 +1,5 @@
 import h from './createElement'
-import { render, mount } from './view'
+import { render, mount } from './render'
 
 const INITIAL_STATE = {
   accounts: [

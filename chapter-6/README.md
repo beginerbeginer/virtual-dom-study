@@ -1,7 +1,7 @@
 # 6 章
 
 actions を作る
-follow するアクションを作る
+follow するアクションを作る (toggleFollow)
 app に渡す
 dispatchAction を定義 constructor に定義
 dispatchAction の実装
@@ -22,7 +22,3 @@ view に action を渡す
 accountItem コンポーネントにも action と state を渡す
 
 ブラウザで確認
-
-フォローボタンを連打すると動作しなくなる
-render を遅らせる
-delayRender の実装

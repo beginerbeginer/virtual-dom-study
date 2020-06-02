@@ -1,7 +1,7 @@
 import h from './createElement'
-import { App } from './app'
+import { app } from './app'
 
-const state = {
+const INITIAL_STATE = {
   accounts: [
     {
       id: 1,
@@ -80,12 +80,12 @@ const accountItem = (account) => {
   })
 }
 
-const view = (state) =>
+const view = (props) =>
   h('ul', {
     attrs: {
       class: 'accountList'
     },
-    children: state.accounts.map((e) => {
+    children: props.accounts.map((e) => {
       return h('li', {
         attrs: {
           class: 'accountList__item'
@@ -95,8 +95,8 @@ const view = (state) =>
     })
   })
 
-new App({
-  el: '#app',
-  view,
-  state
+app({
+  root: '#app',
+  state: INITIAL_STATE,
+  view
 })

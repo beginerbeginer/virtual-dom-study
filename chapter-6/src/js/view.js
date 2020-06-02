@@ -1,14 +1,14 @@
 //
 
 const isVNode = (node) => {
-  return typeof node !== 'string' && typeof node !== 'number'
+  return typeof node !== 'string'
 }
 
 const isEventAttr = (attr) => {
   return /^on/.test(attr)
 }
 
-const setAttributes = (target, attrs) => {
+const setAttrs = (target, attrs) => {
   for (const [k, v] of Object.entries(attrs)) {
     if (isEventAttr(k)) {
       target.addEventListener('click', v)
@@ -19,7 +19,7 @@ const setAttributes = (target, attrs) => {
 }
 
 const updateAttrs = (target, oldAttrs, newAttrs) => {
-  for (const [k, v] of Object.entries(oldAttrs)) {
+  for (const [k] of Object.entries(oldAttrs)) {
     if (!isEventAttr(k)) {
       target.removeAttribute(k)
     }
@@ -35,7 +35,7 @@ const updateAttrs = (target, oldAttrs, newAttrs) => {
 function renderElement({ tagName, attrs, children }) {
   const $el = document.createElement(tagName)
 
-  setAttributes($el, attrs)
+  setAttrs($el, attrs)
 
   for (const child of children) {
     $el.appendChild(render(child))
@@ -51,46 +51,53 @@ export function render(vNode) {
   return renderElement(vNode)
 }
 
+const hasTextChild = (node) => {
+  return node && node.children && node.children.length > 0 && typeof node.children[0] === 'string'
+}
+
 const hasChanged = (a, b) => {
   if (typeof a !== typeof b) {
-    return 'Type'
+    return 'TYPE'
   }
 
-  if (!isVNode(a) && a !== b) {
-    return 'Text'
+  if (hasTextChild(a) && hasTextChild(b)) {
+    if (b.children[0] !== a.children[0]) {
+      return 'TEXT'
+    }
   }
 
   if (isVNode(a) && isVNode(b)) {
     if (a.tagName !== b.tagName) {
-      return 'Node'
+      return 'NODE'
     }
 
     if (JSON.stringify(a.attrs) !== JSON.stringify(b.attrs)) {
-      return 'Attr'
+      return 'ATTR'
     }
   }
 
-  return 'None'
+  return 'NONE'
 }
 
 export const updateElements = (parent, newNode, oldNode, index = 0) => {
   if (!oldNode) {
     parent.appendChild(render(newNode))
   }
+  const target = parent.childNodes[index]
   if (!newNode) {
-    parent.removeChild(parent.childNodes[index])
+    parent.removeChild(target)
   }
-  const changeType = hasChanged(oldNode, newNode)
+  const type = hasChanged(oldNode, newNode)
 
-  switch (changeType) {
-    case 'Type':
-    case 'Text':
-    case 'Node':
-      parent.replaceChild(render(newNode), parent.childNodes[index])
+  switch (type) {
+    case 'TYPE':
+    case 'TEXT':
+    case 'NODE':
+      parent.replaceChild(render(newNode), target)
       return
 
-    case 'Attr':
-      updateAttrs(parent.childNodes[index], oldNode.attrs, newNode.attrs)
+    case 'ATTR':
+      updateAttrs(target, oldNode.attrs, newNode.attrs)
       return
   }
 
@@ -98,7 +105,7 @@ export const updateElements = (parent, newNode, oldNode, index = 0) => {
     const newLength = newNode.children.length
     const oldLength = oldNode.children.length
     for (let i = 0; i < newLength || i < oldLength; i++) {
-      updateElements(parent.childNodes[index], newNode.children[i], oldNode.children[i], i)
+      updateElements(target, newNode.children[i], oldNode.children[i], i)
     }
   }
 }

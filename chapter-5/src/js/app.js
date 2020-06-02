@@ -1,19 +1,12 @@
 import { mount, render } from './view'
 
-export class App {
-  constructor(params) {
-    this.el = typeof params.el === 'string' ? document.querySelector(params.el) : params.el
-    this.view = params.view
-    this.state = params.state
-    this.newNode = this.view(this.state)
-    this.resolveNode()
+export const app = ({ root, state, view }) => {
+  const $el = document.querySelector(root)
+  let newNode = view(state)
+
+  const renderDOM = () => {
+    $el.appendChild(render(newNode))
   }
 
-  resolveNode() {
-    this.appRender()
-  }
-
-  appRender() {
-    this.el.appendChild(render(this.newNode))
-  }
+  renderDOM()
 }

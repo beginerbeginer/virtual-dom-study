@@ -1,7 +1,7 @@
 import h from './createElement'
-import { App } from './app'
+import { app } from './app'
 
-const state = {
+const INITIAL_STATE = {
   accounts: [
     {
       id: 1,
@@ -31,7 +31,7 @@ const state = {
 }
 
 const actions = {
-  follow(state, id) {
+  toggleFollow(state, id) {
     const accounts = state.accounts.map((f) => {
       if (f.id === id) {
         return { ...f, isFollow: !f.isFollow }
@@ -44,7 +44,7 @@ const actions = {
   }
 }
 
-const accountItem = (account, action, state) => {
+const accountItem = (account, props, action) => {
   return h('div', {
     attrs: {},
     children: [
@@ -77,9 +77,7 @@ const accountItem = (account, action, state) => {
                 attrs: {
                   type: 'button',
                   class: `followBtn ${account.isFollow ? 'isFollow' : ''}`,
-                  onclick: () => {
-                    action.follow(state, account.id)
-                  }
+                  onclick: () => action.toggleFollow(props, account.id)
                 },
                 children: [account.isFollow ? 'フォロー中' : 'フォローする']
               })
@@ -97,24 +95,24 @@ const accountItem = (account, action, state) => {
   })
 }
 
-const view = (state, action) =>
+const view = (props, action) =>
   h('ul', {
     attrs: {
       class: 'accountList'
     },
-    children: state.accounts.map((e) => {
+    children: props.accounts.map((e) => {
       return h('li', {
         attrs: {
           class: 'accountList__item'
         },
-        children: [accountItem(e, action, state)]
+        children: [accountItem(e, props, action)]
       })
     })
   })
 
-new App({
-  el: '#app',
+app({
+  root: '#app',
+  state: INITIAL_STATE,
   view,
-  state,
   actions
 })

@@ -1,54 +1,36 @@
-import { updateElements, render } from './view'
+import { updateElements } from './view'
 
-export class App {
-  constructor(params) {
-    this.el = typeof params.el === 'string' ? document.querySelector(params.el) : params.el
-    this.view = params.view
-    this.state = params.state
-    this.actions = this.dispatchAction(params.actions)
-    this.newNode = this.view(this.state, this.actions)
+export const app = ({ root, state, view, actions }) => {
+  const $el = document.querySelector(root)
+  let newNode
+  let oldNode
 
-    this.resolveNode()
-  }
-
-  dispatchAction(actions) {
+  const dispatcher = (actions) => {
     const dispatched = {}
 
     for (const key in actions) {
       const action = actions[key]
 
       dispatched[key] = (state, option) => {
-        const r = action(state, option)
-        this.resolveNode()
-        return r
+        action(state, option)
+        renderDOM()
       }
     }
 
     return dispatched
   }
 
-  resolveNode() {
-    this.newNode = this.view(this.state, this.actions)
-    this.delayRender()
+  const dispachedActions = dispatcher(actions)
+
+  const updateNode = () => {
+    newNode = view(state, dispachedActions)
   }
 
-  delayRender() {
-    if (!this.isDelay) {
-      this.isDelay = true
-
-      setTimeout(this.appRender.bind(this))
-    }
+  const renderDOM = () => {
+    updateNode()
+    updateElements($el, newNode, oldNode)
+    oldNode = newNode
   }
 
-  appRender() {
-    if (this.oldNode) {
-      updateElements(this.el, this.newNode, this.oldNode)
-    } else {
-      this.el.appendChild(render(this.newNode))
-    }
-
-    this.isDelay = false
-
-    this.oldNode = this.newNode
-  }
+  renderDOM()
 }

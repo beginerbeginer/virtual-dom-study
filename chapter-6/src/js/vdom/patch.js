@@ -43,9 +43,10 @@ export const patch = (parent, newNode, oldNode, index = 0) => {
   if (!oldNode) {
     parent.appendChild(render(newNode))
   }
-  const target = parent.childNodes[index]
+  const childNode = parent.childNodes[index]
+
   if (!newNode) {
-    parent.removeChild(target)
+    parent.removeChild(childNode)
   }
   const type = hasChanged(oldNode, newNode)
 
@@ -53,11 +54,11 @@ export const patch = (parent, newNode, oldNode, index = 0) => {
     case 'TYPE':
     case 'TEXT':
     case 'NODE':
-      parent.replaceChild(render(newNode), target)
+      parent.replaceChild(render(newNode), childNode)
       return
 
     case 'ATTR':
-      updateAttrs(target, oldNode.attrs, newNode.attrs)
+      updateAttrs(childNode, oldNode.attrs, newNode.attrs)
       return
   }
 
@@ -65,7 +66,7 @@ export const patch = (parent, newNode, oldNode, index = 0) => {
     const newLength = newNode.children.length
     const oldLength = oldNode.children.length
     for (let i = 0; i < newLength || i < oldLength; i++) {
-      patch(target, newNode.children[i], oldNode.children[i], i)
+      patch(childNode, newNode.children[i], oldNode.children[i], i)
     }
   }
 }

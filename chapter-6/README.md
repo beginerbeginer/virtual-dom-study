@@ -3,10 +3,10 @@
 actions を作る
 follow するアクションを作る (toggleFollow)
 app に渡す
-dispatchAction を定義 constructor に定義
-dispatchAction の実装
+dispatcherの作成
+渡したactionをdispatchする
 
-view.js の作成
+patch.js の作成
 updateElements の実装
 hasChanged の newNode と oldNode を比較する
 updateElements で再帰的に処理をして DOM に反映する

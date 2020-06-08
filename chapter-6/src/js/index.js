@@ -39,12 +39,11 @@ const actions = {
         return f
       }
     })
-
-    state.accounts = accounts
+    return { ...state, accounts }
   }
 }
 
-const accountItem = (account, props, action) => {
+const accountItem = (account, action) => {
   return h('div', {
     attrs: {},
     children: [
@@ -77,7 +76,7 @@ const accountItem = (account, props, action) => {
                 attrs: {
                   type: 'button',
                   class: `followBtn ${account.isFollow ? 'isFollow' : ''}`,
-                  onclick: () => action.toggleFollow(props, account.id)
+                  onclick: () => action.toggleFollow(account.id)
                 },
                 children: [account.isFollow ? 'フォロー中' : 'フォローする']
               })
@@ -105,14 +104,14 @@ const view = (props, action) =>
         attrs: {
           class: 'accountList__item'
         },
-        children: [accountItem(e, props, action)]
+        children: [accountItem(e, action)]
       })
     })
   })
 
 app({
   root: '#app',
-  state: INITIAL_STATE,
+  initialState: INITIAL_STATE,
   view,
   actions
 })

@@ -46,27 +46,27 @@ function App() {
     [accounts, setAccounts]
   );
   return (
-    <ul class="accountList">
+    <ul className="accountList">
       {accounts.map((e) => {
         return (
-          <li key={e.id} class="accountList__item">
+          <li key={e.id} className="accountList__item">
             <div>
-              <div class="account__summary">
+              <div className="account__summary">
                 <div>
-                  <p class="account__name">{e.name}</p>
-                  <p class="account__team">{e.team}</p>
+                  <p className="account__name">{e.name}</p>
+                  <p className="account__team">{e.team}</p>
                 </div>
                 <div>
                   <button
                     type="button"
-                    class={`followBtn ${e.isFollow ? "isFollow" : ""}`}
+                    className={`followBtn ${e.isFollow ? "isFollow" : ""}`}
                     onClick={() => onClickFollow(e.id)}
                   >
                     {e.isFollow ? "フォロー中" : "フォローする"}
                   </button>
                 </div>
               </div>
-              <p class="account__description">{e.description}</p>
+              <p className="account__description">{e.description}</p>
             </div>
           </li>
         );

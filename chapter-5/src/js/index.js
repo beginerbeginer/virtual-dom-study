@@ -97,6 +97,6 @@ const view = (props) =>
 
 app({
   root: '#app',
-  state: INITIAL_STATE,
+  initialState: INITIAL_STATE,
   view
 })

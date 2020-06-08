@@ -1,18 +1,36 @@
 import { patch } from './patch'
-import { dispatcher } from './dispatcher'
 
-export const app = ({ root, state, view, actions }) => {
+export const app = ({ root, initialState, view, actions }) => {
   const $el = document.querySelector(root)
   let newNode
   let oldNode
+  let state = initialState
 
-  const dispachedActions = dispatcher(actions, () => renderDOM())
+  const dispacher = function (actions) {
+    const dispatchedActions = {}
 
-  const updateNode = () => {
-    newNode = view(state, dispachedActions)
+    for (const key in actions) {
+      const action = actions[key]
+
+      dispatchedActions[key] = (option) => {
+        setState(action(state, option))
+        renderDOM()
+      }
+    }
+    return dispatchedActions
   }
 
-  const renderDOM = () => {
+  const setState = function (newState) {
+    if (state !== newState) {
+      state = newState
+    }
+  }
+
+  const updateNode = function () {
+    newNode = view(state, dispacher(actions))
+  }
+
+  const renderDOM = function () {
     updateNode()
     patch($el, newNode, oldNode)
     oldNode = newNode

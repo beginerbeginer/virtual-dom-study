@@ -1,5 +1,5 @@
 import h from './vdom/createElement'
-import { render, mount } from './vdom/render'
+import { render } from './vdom/render'
 
 const view = h('p', {
   attrs: {},

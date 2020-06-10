@@ -3,7 +3,7 @@ import { isEventAttr } from './utils'
 const setAttrs = (target, attrs) => {
   for (const attr in attrs) {
     if (isEventAttr(attr)) {
-      target.addEventListener('click', attrs[attr])
+      target.addEventListener(attr.slice(2), attrs[attr])
     } else {
       target.setAttribute(attr, attrs[attr])
     }

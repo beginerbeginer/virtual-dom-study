@@ -1,9 +1,19 @@
+import { isEventAttr } from './utils'
+
+const setAttrs = (target, attrs) => {
+  for (const attr in attrs) {
+    if (isEventAttr(attr)) {
+      target.addEventListener(attr.slice(2), attrs[attr])
+    } else {
+      target.setAttribute(attr, attrs[attr])
+    }
+  }
+}
+
 function renderElement({ tagName, attrs, children }) {
   const $el = document.createElement(tagName)
 
-  for (const [k, v] of Object.entries(attrs)) {
-    $el.setAttribute(k, v)
-  }
+  setAttrs($el, attrs)
 
   for (const child of children) {
     $el.appendChild(render(child))

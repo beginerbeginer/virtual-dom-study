@@ -31,7 +31,7 @@ function App() {
   const [accounts, setAccounts] = React.useState(data);
   const onClickFollow = React.useCallback(
     (id) => {
-      const updatedAccouns = accounts.map((e) => {
+      const updatedAccounts = accounts.map((e) => {
         if (e.id === id) {
           return {
             ...e,
@@ -41,7 +41,7 @@ function App() {
           return e;
         }
       });
-      setAccounts(updatedAccouns);
+      setAccounts(updatedAccounts);
     },
     [accounts, setAccounts]
   );

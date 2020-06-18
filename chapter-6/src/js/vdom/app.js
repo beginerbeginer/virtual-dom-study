@@ -6,7 +6,7 @@ export const app = ({ root, initialState, view, actions }) => {
   let oldNode
   let state = initialState
 
-  const dispacher = function (actions) {
+  const dispatcher = function (actions) {
     const dispatchedActions = {}
 
     for (const key in actions) {
@@ -27,7 +27,7 @@ export const app = ({ root, initialState, view, actions }) => {
   }
 
   const updateNode = function () {
-    newNode = view(state, dispacher(actions))
+    newNode = view(state, dispatcher(actions))
   }
 
   const renderDOM = function () {

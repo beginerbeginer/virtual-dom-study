@@ -1,9 +1,9 @@
-export const isVNode = (node) => {
-  return typeof node !== 'string'
-}
-
 export const isEventAttr = (attr) => {
   return /^on/.test(attr)
+}
+
+export const isVNode = (node) => {
+  return typeof node !== 'string'
 }
 
 export const isTextChild = (node) => {

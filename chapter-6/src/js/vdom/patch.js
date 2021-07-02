@@ -16,7 +16,6 @@ const hasChanged = (oldNode, newNode) => {
     if (oldNode.tagName !== newNode.tagName) {
       return 'NODE'
     }
-
     if (JSON.stringify(oldNode.attrs) !== JSON.stringify(newNode.attrs)) {
       return 'ATTR'
     }

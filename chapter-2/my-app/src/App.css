@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+/** 共通スタイル **/
+html {
+  font-size: 62.5%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: #fafafa;
+  font-size: 1.6rem;
+  color: #222;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/** アカウント一覧スタイル **/
+#root {
+  width: 100%;
+  max-width: 640px;
+  margin: 100px auto;
+  padding: 0;
+  background: #fff;
+  border: solid 1px #e0e0e0;
+}
+
+.accountList {
+  padding: 0;
+  margin: 0;
+}
+
+.accountList__item {
+  position: relative;
+  padding: 1rem;
+  border-bottom: solid 1px #e0e0e0;
+}
+
+.accountList__item:last-child {
+  border: 0;
+}
+
+.account__summary {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 1rem;
 }
 
-.App-link {
-  color: #61dafb;
+.account__name {
+  font-weight: 700;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.account__team {
+  font-size: 1.2rem;
+  color: #646464;
+}
+
+.account__description {
+  font-size: 1.4rem;
+}
+
+.followBtn {
+  display: inline-block;
+  min-width: 100px;
+  border: 0;
+  touch-action: manipulation;
+  cursor: pointer;
+  padding: 0 1rem;
+  height: 32px;
+  line-height: 32px;
+  font-weight: 800;
+  outline: none;
+  position: relative;
+  border: solid 1px #e0e0e0;
+  background: #fff;
+  color: #222;
+  border-radius: 16px;
+}
+
+.followBtn:hover {
+  background: #e0e0e0;
+}
+
+.followBtn.isFollow {
+  background: rgb(29, 161, 242);
+  border: solid 1px rgb(29, 161, 242);
+  color: #fff;
+}
+
+.followBtn.isFollow:hover {
+  opacity: 0.7;
 }

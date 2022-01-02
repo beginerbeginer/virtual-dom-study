@@ -29,21 +29,22 @@ const data = [
 
 function App() {
   const [accounts, setAccounts] = React.useState(data);
-  const onClickFollow = React.useCallback(
-    (id) => {
-      const updatedAccounts = accounts.map((e) => {
-        if (e.id === id) {
+  // ボタン押下後のフォローとフォロー解除の実装
+  const onClickFollow = React.useCallback(  // ボタン押下時に実行される関数
+    (id) => {                       // id: ボタンが押されたアカウントのid
+      const updatedAccounts = accounts.map((e) => {   // フォローしたアカウントのみを更新 (isFollow: true)  // フォロー解除したアカウントのみを更新 (isFollow: false) // アカウントのidが一致した場合にisFollowを反転させる
+        if (e.id === id) {          // idが一致した場合 (e.id === id)
           return {
             ...e,
-            isFollow: !e.isFollow,
-          };
-        } else {
-          return e;
+            isFollow: !e.isFollow,  // isFollowを反転させる
+          };                        // ...e: eの中身を全てコピーして新しいオブジェクトを作成
+        } else {                    // idが一致しなかった場合
+          return e;                 // eをそのまま返す
         }
       });
-      setAccounts(updatedAccounts);
-    },
-    [accounts, setAccounts]
+      setAccounts(updatedAccounts); // 更新したアカウントをセット
+    },                              // ボタン押下時に実行される関数
+    [accounts, setAccounts]         // 引数にaccountsとsetAccountsを渡す
   );
   return (
     <ul class="accountList">

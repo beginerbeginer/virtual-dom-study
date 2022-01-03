@@ -25,10 +25,10 @@ function renderElement({ tagName, attrs, children }) {
   return $el
 }
 
-// 渡された要素が文字列かどうかを判定する
+// 渡された要素が文字列か数字かを判定する
 export function render(vNode) {
-  // 文字列の場合
-  if (typeof vNode === 'string') {
+  // 文字列または数字の場合はそのまま返す
+  if (typeof vNode === 'string' || typeof vNode === 'number') {
     // 文字列をDOMに変換して返す
     return document.createTextNode(vNode)
   }

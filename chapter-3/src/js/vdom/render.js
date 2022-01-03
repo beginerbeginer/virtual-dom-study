@@ -1,6 +1,7 @@
 // 渡された要素のtagNameを元にリアルDOM要素を作成 (createElement) する。
 function renderElement({ tagName, attrs, children }) {
   // 仮想DOMをリアルDOMに変換する
+  // tagNameはpなのでリアルDOMでは<p></p>に変換される
   const $el = document.createElement(tagName)
   console.log('$el', $el)
   /*
@@ -12,6 +13,7 @@ function renderElement({ tagName, attrs, children }) {
   */
 
   // 仮想DOMに属性を追加する
+  // 作成されたDOM要素$elにclass、id、typeなどの属性を付与する
   for (const [k, v] of Object.entries(attrs)) {
     $el.setAttribute(k, v)
   }

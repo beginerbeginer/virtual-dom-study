@@ -2,6 +2,15 @@
 function renderElement({ tagName, attrs, children }) {
   // 仮想DOMをリアルDOMに変換する
   const $el = document.createElement(tagName)
+  console.log('$el', $el)
+  /*
+  <p>
+    "仮想DOMの学習スタート！"
+    "このように仮想DOMを作ることができる。"
+    "仮想DOMは、DOMとは違うものである。"
+  </p>
+  */
+
   // 仮想DOMに属性を追加する
   for (const [k, v] of Object.entries(attrs)) {
     $el.setAttribute(k, v)

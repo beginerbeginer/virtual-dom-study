@@ -1,6 +1,8 @@
 import h from './vdom/createElement'
 import { render } from './vdom/render'
 
+// アカウント一覧のデータを元にINITIAL_STATEを作成
+// 変更不可であることを明示的にするために全て大文字にする
 const INITIAL_STATE = {
   accounts: [
     {
@@ -30,6 +32,7 @@ const INITIAL_STATE = {
   ]
 }
 
+// viewを書き換えて、アカウント一覧が表示されるようにする
 const accountItem = (account) => {
   return h('div', {
     attrs: {},
@@ -80,6 +83,7 @@ const accountItem = (account) => {
   })
 }
 
+// viewにstateを渡せるよう関数に変更する
 const view = (props) =>
   h('ul', {
     attrs: {
@@ -95,6 +99,7 @@ const view = (props) =>
     })
   })
 
+// renderをする仮想DOMであるviewにINITIAL_STATEを渡す
 const $app = render(view(INITIAL_STATE))
 const el = document.getElementById('app')
 el.appendChild($app)

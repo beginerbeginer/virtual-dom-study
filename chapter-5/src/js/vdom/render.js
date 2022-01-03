@@ -1,9 +1,14 @@
 import { isEventAttr } from './utils'
 
 const setAttrs = (target, attrs) => {
+  // attrsをループして、targetに設定する
   for (const attr in attrs) {
+    // isEventAttr関数を使いイベントかどうかを判定
     if (isEventAttr(attr)) {
+      // 文字列として渡されているonclickのonを削除
+      // addEventListenerで要素に対してイベントを登録
       target.addEventListener(attr.slice(2), attrs[attr])
+      console.log("(attr.slice(2):", attr.slice(2))
     } else {
       target.setAttribute(attr, attrs[attr])
     }

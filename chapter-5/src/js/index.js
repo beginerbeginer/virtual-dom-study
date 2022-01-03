@@ -62,8 +62,8 @@ const accountItem = (account) => {
               h('button', {
                 attrs: {
                   type: 'button',
-                  class: `followBtn ${account.isFollow ? 'isFollow' : ''}`,
-                  onclick: () => alert(account.name)
+                  class: `followBtn ${account.isFollow ? 'isFollow' : ''}`, // isFollowがtrueならisFollowクラスを付与
+                  onclick: () => alert(account.name) // ブラウザのアラートにアカウントの名前が表示
                 },
                 children: [account.isFollow ? 'フォロー中' : 'フォローする']
               })
